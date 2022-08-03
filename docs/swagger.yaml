@@ -1,0 +1,51 @@
+definitions:
+  main.Response:
+    properties:
+      message:
+        type: string
+      timer_id:
+        type: string
+    type: object
+  main.StartTimerRequest:
+    properties:
+      callback_method:
+        type: string
+      callback_url:
+        type: string
+      duration:
+        type: integer
+    type: object
+host: localhost:7070
+info:
+  contact: {}
+  description: Timer Producer API.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Swagger Producer API
+  version: "1.0"
+paths:
+  /v1/timer/start:
+    post:
+      consumes:
+      - application/json
+      description: Start a timer of duration in secs and get a callback once timeout
+        on the mention callback url
+      parameters:
+      - description: request body
+        in: body
+        name: startTimer
+        required: true
+        schema:
+          $ref: '#/definitions/main.StartTimerRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.Response'
+      summary: Start a timer.
+      tags:
+      - Timer
+swagger: "2.0"

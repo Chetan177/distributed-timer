@@ -1,0 +1,77 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Timer Producer API.",
+        "title": "Swagger Producer API",
+        "contact": {},
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:7070",
+    "paths": {
+        "/v1/timer/start": {
+            "post": {
+                "description": "Start a timer of duration in secs and get a callback once timeout on the mention callback url",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Timer"
+                ],
+                "summary": "Start a timer.",
+                "parameters": [
+                    {
+                        "description": "request body",
+                        "name": "startTimer",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.StartTimerRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.Response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "main.Response": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "timer_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "main.StartTimerRequest": {
+            "type": "object",
+            "properties": {
+                "callback_method": {
+                    "type": "string"
+                },
+                "callback_url": {
+                    "type": "string"
+                },
+                "duration": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}
